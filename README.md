@@ -75,3 +75,13 @@ python -m pytest
 ```bash
 python -m pytest -s
 ```
+
+## Test Results
+
+80 tests passed.
+
+## CI/CD
+
+Tests are automatically executed using GitHub Actions on:
+- push to master
+- pull requests to master
