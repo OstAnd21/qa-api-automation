@@ -1,5 +1,7 @@
 # QA API Automation
 
+[![API Tests](https://github.com/OstAnd21/qa-api-automation/actions/workflows/tests.yml/badge.svg)](https://github.com/OstAnd21/qa-api-automation/actions/workflows/tests.yml)
+
 API automation testing project built with Python, pytest, and requests.
 
 ## Tech Stack
