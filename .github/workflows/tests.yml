@@ -11,6 +11,10 @@ on:
 jobs:
   smoke:
     runs-on: ubuntu-latest
+    
+    env:
+      ENV: test
+      BASE_URL: https://jsonplaceholder.typicode.com
 
     steps:
       - name: Checkout repository
@@ -32,6 +36,10 @@ jobs:
   test:
     needs: smoke
     runs-on: ubuntu-latest
+    
+    env:
+      ENV: test
+      BASE_URL: https://jsonplaceholder.typicode.com
 
     steps:
       - name: Checkout repository
