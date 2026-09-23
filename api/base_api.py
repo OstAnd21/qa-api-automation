@@ -1,5 +1,5 @@
-import requests
 from utils.logger import logger
+import requests
 import time
 
 class BaseAPI:
@@ -9,6 +9,7 @@ class BaseAPI:
         self.session.headers.update({
             "Accept": "application/json"
         })
+
     def get(self, endpoint, params=None, headers=None, timeout=None):
         return self._request(
             "GET",
@@ -17,6 +18,7 @@ class BaseAPI:
             headers=headers,
             timeout=timeout
         )
+
     def post(self, endpoint, data, headers=None):
         return self._request(
             "POST",
@@ -24,6 +26,7 @@ class BaseAPI:
             json=data,
             headers=headers
         )
+
     def put(self, endpoint, data, headers=None):
         return self._request(
             "PUT",
@@ -31,6 +34,7 @@ class BaseAPI:
             json=data,
             headers=headers
         )
+
     def patch(self, endpoint, data, headers=None):
         return self._request(
             "PATCH",
@@ -38,14 +42,19 @@ class BaseAPI:
             json=data,
             headers=headers
         )
+
     def delete(self, endpoint, headers=None):
         return self._request(
             "DELETE",
             endpoint,
             headers=headers
         )
+
     def _request(self, method, endpoint, **kwargs):
-        url = f"{self.base_url}{endpoint}"
+        if endpoint.startswith(("http://", "https://")):
+            url = endpoint
+        else:
+            url = f"{self.base_url}{endpoint}"
         logger.info(f"Sending {method} request: {url}")
         start_time = time.perf_counter()
         response = self.session.request(
