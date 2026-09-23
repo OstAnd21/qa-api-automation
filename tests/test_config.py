@@ -1,8 +1,8 @@
-from config import ENV, BASE_URL
+from config import settings
 
 
 def test_environment():
-    assert ENV in {"dev", "test", "prod"}
+    assert settings.ENV in {"dev", "test", "prod"}
 
 def test_base_url():
-    assert BASE_URL.startswith("https://")
+    assert settings.BASE_URL.startswith("https://")

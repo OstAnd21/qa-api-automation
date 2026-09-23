@@ -1,9 +1,9 @@
-from config import BASE_URL
+from config import settings
 from api.base_api import BaseAPI
 
 class UsersAPI(BaseAPI):
     def __init__(self):
-        super().__init__(BASE_URL)
+        super().__init__(settings.BASE_URL)
 
     def get_user(self, user_id):
         return self.get(f"/users/{user_id}")

@@ -3,19 +3,25 @@ import os
 
 load_dotenv()
 
-ENV = os.getenv(
-    "ENV",
-    "test"
-)
-
-ALLOWED_ENVS = {"dev", "test", "prod"}
-if ENV not in ALLOWED_ENVS:
-    raise ValueError(
-        f"Unknown environment: {ENV}. "
-        f"Allowed: {ALLOWED_ENVS}"
+class Settings:
+    ENV = os.getenv(
+        "ENV",
+        "test"
+    )
+    
+    BASE_URL = os.getenv(
+        "BASE_URL",
+        "https://jsonplaceholder.typicode.com"
     )
 
-BASE_URL = os.getenv(
-    "BASE_URL",
-    "https://jsonplaceholder.typicode.com"
-)
+    ALLOWED_ENVS = {"dev", "test", "prod"}
+    def validate(self):
+        if self.ENV not in self.ALLOWED_ENVS:
+            raise ValueError(
+                f"Unknown environment: {self.ENV}. "
+                f"Allowed: {self.ALLOWED_ENVS}"
+            )
+        
+
+settings = Settings()
+settings.validate()
