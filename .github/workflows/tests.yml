@@ -9,44 +9,6 @@ on:
       - master
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.14"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Install Allure CLI
-        run: npm install -g allure
-
-      - name: Run tests
-        run: python -m pytest --alluredir=allure-results
-
-      - name: Generate Allure report
-        run: allure generate allure-results -o allure-report
-
-      - name: Upload Allure results
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results
-
-      - name: Upload Allure report
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: allure-report
-
   smoke:
     runs-on: ubuntu-latest
 
@@ -66,3 +28,42 @@ jobs:
 
       - name: Run smoke tests
         run: python -m pytest -m smoke
+
+  test:
+    needs: smoke
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run regression tests
+        run: python -m pytest --alluredir=allure-results
+
+      - name: Install Allure CLI
+        run: npm install -g allure
+
+      - name: Generate Allure report
+        run: allure generate allure-results -o allure-report
+
+      - name: Upload Allure results
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+
+      - name: Upload Allure report
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report

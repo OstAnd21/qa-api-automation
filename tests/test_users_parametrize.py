@@ -1,9 +1,9 @@
-import copy
-import pytest
-import allure
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError
 from schemas.user_schema import user_schema
+import copy
+import pytest
+import allure
 
 @allure.feature("Users API")
 @allure.story("Negative schema validation")
@@ -16,7 +16,6 @@ from schemas.user_schema import user_schema
     ("phone", 12345),
     ("website", 12345),
 ])
-
 def test_user_schema_invalid_field(valid_user, field, invalid_value):
     invalid_user = copy.deepcopy(valid_user)
     with allure.step(f"Set invalid value for field: {field}"):
@@ -34,7 +33,6 @@ def test_user_schema_invalid_field(valid_user, field, invalid_value):
     ("suite", 12345),
     ("zipcode", 12345),
 ])
-
 def test_user_schema_invalid_address_field(valid_user, field, invalid_value):
     invalid_user = copy.deepcopy(valid_user)
     with allure.step(f"Set invalid value for address field: {field}"):
@@ -50,7 +48,6 @@ def test_user_schema_invalid_address_field(valid_user, field, invalid_value):
     ("lat", 12345),
     ("lng", 12345),
 ])
-
 def test_user_schema_invalid_geo_field(valid_user, field, invalid_value):
     invalid_user = copy.deepcopy(valid_user)
     with allure.step(f"Set invalid value for geo field: {field}"):
@@ -67,7 +64,6 @@ def test_user_schema_invalid_geo_field(valid_user, field, invalid_value):
     ("catchPhrase", 12345),
     ("bs", 12345),
 ])
-
 def test_user_schema_invalid_company_field(valid_user, field, invalid_value):
     invalid_user = copy.deepcopy(valid_user)
     with allure.step(f"Set invalid value for company field: {field}"):

@@ -6,7 +6,6 @@ import allure
 @allure.feature("Users API")
 @allure.story("Error handling")
 @allure.title("Handle invalid URL")
-
 def test_invalid_url():
     api = UsersAPI()
     with allure.step("Send request to invalid URL"):
@@ -16,7 +15,6 @@ def test_invalid_url():
 @allure.feature("Users API")
 @allure.story("Error handling")
 @allure.title("Handle request timeout")
-
 def test_request_timeout():
     api = UsersAPI()
     with allure.step("Send request with timeout"):

@@ -10,7 +10,6 @@ import allure
 @allure.feature("Users API")
 @allure.story("User validation")
 @allure.title("Check required user fields")
-
 def test_user_has_required_fields(user_id):
     api = UsersAPI()
     with allure.step("Send GET request"):
@@ -32,7 +31,6 @@ def test_user_has_required_fields(user_id):
 @allure.feature("Users API")
 @allure.story("User validation")
 @allure.title("Check required user fields")
-
 def test_user_data_types(user_id):
     api = UsersAPI()
     with allure.step("Send GET request"):

@@ -1,6 +1,6 @@
-import pytest
 from unittest.mock import Mock
 from utils.response_validator import assert_status_code, assert_content_type
+import pytest
 
 def test_status_code_validator_fails():
     response = Mock(status_code=404)

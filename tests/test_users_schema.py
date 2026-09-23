@@ -12,7 +12,6 @@ import allure
 @allure.feature("Users API")
 @allure.story("Schema validation")
 @allure.title("Validate single user schema")
-
 def test_get_user_schema():
     api = UsersAPI()
     with allure.step("Send GET request"):
@@ -32,7 +31,6 @@ def test_get_user_schema():
 @allure.feature("Users API")
 @allure.story("Schema validation")
 @allure.title("Validate users list schema")
-
 def test_get_users_schema():
     api = UsersAPI()
     with allure.step("Send GET request"):
