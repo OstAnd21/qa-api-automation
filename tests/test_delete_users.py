@@ -5,11 +5,12 @@ from utils.response_validator import (
     assert_response_time
 )
 import allure
+import pytest
 
 @allure.feature("Users API")
 @allure.story("Delete user")
 @allure.title("Delete user by ID")
-
+@pytest.mark.smoke
 def test_delete_user(user_id):
     api = UsersAPI()
     with allure.step("Send DELETE request"):
@@ -22,7 +23,6 @@ def test_delete_user(user_id):
 @allure.feature("Users API")
 @allure.story("Delete user")
 @allure.title("Delete user from API class")
-
 def test_delete_user_from_api_class():
     api = UsersAPI()
     with allure.step("Send DELETE request"):

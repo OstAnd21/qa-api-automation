@@ -29,6 +29,7 @@ def test_get_users_by_different_usernames(username):
 
 @allure.story("Get user")
 @allure.title("Get user by ID")
+@pytest.mark.smoke
 def test_get_user(user_id):
     api = UsersAPI()
     with allure.step("Send GET request"):

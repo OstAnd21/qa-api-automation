@@ -1,7 +1,7 @@
-import pytest
 from unittest.mock import Mock, patch
 from api.users_api import UsersAPI
 from test_data.users_data import NEW_USER, USER_ID, VALID_USER
+import pytest
 
 @pytest.fixture
 def user_data():
@@ -26,3 +26,8 @@ def api_mock():
 @pytest.fixture
 def valid_user():
     return VALID_USER
+
+def pytest_collection_modifyitems(items):
+    regression_marker = pytest.mark.regression
+    for item in items:
+        item.add_marker(regression_marker)

@@ -6,11 +6,12 @@ from utils.response_validator import (
     assert_response_time
 )
 import allure
+import pytest
 
 @allure.feature("Users API")
 @allure.story("Create user")
 @allure.title("Create new user")
-
+@pytest.mark.smoke
 def test_create_user(user_data):
     api = UsersAPI()
     with allure.step("Send POST request"):
@@ -33,7 +34,6 @@ def test_create_user(user_data):
 @allure.feature("Users API")
 @allure.story("Create user")
 @allure.title("Create user without email")
-
 def test_create_user_with_missing_email():
     user_data = {
         "name": "Andrii",
@@ -59,7 +59,6 @@ def test_create_user_with_missing_email():
 @allure.feature("Users API")
 @allure.story("Create user")
 @allure.title("Create user without email")
-
 def test_create_user_with_headers(user_data):
     api = UsersAPI()
     with allure.step("Send POST request with headers"):

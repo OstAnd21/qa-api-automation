@@ -6,12 +6,13 @@ from utils.response_validator import (
     assert_response_time
 )
 import allure
+import pytest
 
 
 @allure.feature("Users API")
 @allure.story("Update user")
 @allure.title("Update user by ID")
-
+@pytest.mark.smoke
 def test_update_user(user_id):
     user_data = {
         "name": "Andrii Updated",
@@ -37,7 +38,6 @@ def test_update_user(user_id):
 @allure.feature("Users API")
 @allure.story("Update user")
 @allure.title("Patch user by ID") 
- 
 def test_patch_user(user_id):
     user_data = {
         "name": "Andrii PATCH"
@@ -60,7 +60,6 @@ def test_patch_user(user_id):
 @allure.feature("Users API")
 @allure.story("Update user")
 @allure.title("Update user from API class")
-
 def test_update_user_from_api_class():
     api = UsersAPI()
     with allure.step("Send PUT request"):
@@ -89,7 +88,6 @@ def test_update_user_from_api_class():
 @allure.feature("Users API")
 @allure.story("Update user")
 @allure.title("Patch user from API class")
-
 def test_patch_user_from_api_class():
     api = UsersAPI()
     with allure.step("Send PATCH request"):
