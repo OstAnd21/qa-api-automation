@@ -1,4 +1,7 @@
 from api.users_api import UsersAPI
+from unittest.mock import patch
+from config import settings
+from api.base_api import BaseAPI
 import pytest
 import requests
 import allure
@@ -17,6 +20,21 @@ def test_invalid_url():
 @allure.title("Handle request timeout")
 def test_request_timeout():
     api = UsersAPI()
-    with allure.step("Send request with timeout"):
-        with pytest.raises(requests.exceptions.Timeout):
-            api.get_users_with_timeout()
+    with patch.object(
+        api.session,
+        "request",
+        side_effect=requests.exceptions.Timeout
+    ):
+        with allure.step("Send request with timeout"):
+            with pytest.raises(requests.exceptions.Timeout):
+                api.get_users_with_timeout()
+                
+def test_retry_configuration():
+    api = BaseAPI(settings.BASE_URL)
+    adapter = api.session.get_adapter("https://")
+    retry = adapter.max_retries
+    assert retry.total is None
+    assert retry.connect == 0
+    assert retry.read is False
+    assert retry.status == 3
+    assert retry.status_forcelist == [502, 503, 504]

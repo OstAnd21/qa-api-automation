@@ -1,4 +1,6 @@
 from utils.logger import logger
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 import requests
 import time
 
@@ -6,6 +8,19 @@ class BaseAPI:
     def __init__(self, base_url):
         self.base_url = base_url
         self.session = requests.Session()
+        retry_strategy = Retry(
+            total = None,
+            connect = 0,
+            read = False,
+            status = 3,
+            status_forcelist = [502, 503, 504],
+            allowed_methods = ["GET", "POST", "PUT", "PATCH", "DELETE"],
+            backoff_factor = 1,
+            raise_on_status = False,
+        )
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+        self.session.mount("https://", adapter)
+        self.session.mount("http://", adapter)
         self.session.headers.update({
             "Accept": "application/json"
         })
