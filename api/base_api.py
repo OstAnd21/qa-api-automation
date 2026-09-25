@@ -1,6 +1,7 @@
 from utils.logger import logger
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+from config import settings
 import requests
 import time
 
@@ -18,7 +19,7 @@ class BaseAPI:
             total = None,
             connect = 0,
             read = False,
-            status = 3,
+            status = settings.RETRY_STATUS,
             status_forcelist = [502, 503, 504],
             allowed_methods = [
                 "GET",
@@ -27,7 +28,7 @@ class BaseAPI:
                 "PATCH",
                 "DELETE"
             ],
-            backoff_factor = 1,
+            backoff_factor = settings.RETRY_BACKOFF_FACTOR,
             raise_on_status = False,
         )
         adapter = HTTPAdapter(
