@@ -8,61 +8,78 @@ class BaseAPI:
     def __init__(self, base_url):
         self.base_url = base_url
         self.session = requests.Session()
+        self._configure_retry()
+        self.session.headers.update({
+            "Accept": "application/json"
+        })
+
+    def _configure_retry(self):
         retry_strategy = Retry(
             total = None,
             connect = 0,
             read = False,
             status = 3,
             status_forcelist = [502, 503, 504],
-            allowed_methods = ["GET", "POST", "PUT", "PATCH", "DELETE"],
+            allowed_methods = [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+            ],
             backoff_factor = 1,
             raise_on_status = False,
         )
-        adapter = HTTPAdapter(max_retries=retry_strategy)
-        self.session.mount("https://", adapter)
-        self.session.mount("http://", adapter)
-        self.session.headers.update({
-            "Accept": "application/json"
-        })
+        adapter = HTTPAdapter(
+            max_retries = retry_strategy
+        )
+        self.session.mount(
+            "https://",
+            adapter
+        )
+        self.session.mount(
+            "http://",
+            adapter
+        )
 
-    def get(self, endpoint, params=None, headers=None, timeout=None):
+    def get(self, endpoint, params = None, headers = None, timeout = None):
         return self._request(
             "GET",
             endpoint,
-            params=params,
-            headers=headers,
-            timeout=timeout
+            params = params,
+            headers = headers,
+            timeout = timeout
         )
 
-    def post(self, endpoint, data, headers=None):
+    def post(self, endpoint, data, headers = None):
         return self._request(
             "POST",
             endpoint,
-            json=data,
-            headers=headers
+            json = data,
+            headers = headers
         )
 
-    def put(self, endpoint, data, headers=None):
+    def put(self, endpoint, data, headers = None):
         return self._request(
             "PUT",
             endpoint,
-            json=data,
-            headers=headers
+            json = data,
+            headers = headers
         )
 
-    def patch(self, endpoint, data, headers=None):
+    def patch(self, endpoint, data, headers = None):
         return self._request(
             "PATCH",
             endpoint,
-            json=data,
-            headers=headers
+            json = data,
+            headers = headers
         )
 
-    def delete(self, endpoint, headers=None):
+    def delete(self, endpoint, headers = None):
         return self._request(
             "DELETE",
             endpoint,
-            headers=headers
+            headers = headers
         )
 
     def _request(self, method, endpoint, **kwargs):
