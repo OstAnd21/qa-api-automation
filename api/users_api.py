@@ -39,14 +39,7 @@ class UsersAPI(BaseAPI):
         return self.get("/users")
 
     def create_user_with_headers(self, user_data):
-        headers = {
-            "Content-Type": "application/json"
-        }
-        return self.post(
-            "/users",
-            user_data,
-            headers=headers
-        )
+        return self.post("/users", user_data)
 
     def get_users_from_invalid_url(self):
         return self.get(

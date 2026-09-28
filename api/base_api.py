@@ -11,7 +11,8 @@ class BaseAPI:
         self.session = requests.Session()
         self._configure_retry()
         self.session.headers.update({
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Content-Type": "application/json"
         })
 
     def _configure_retry(self):

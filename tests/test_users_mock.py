@@ -35,9 +35,9 @@ def test_get_user_mock(api_mock):
         mock_request.assert_called_once_with(
             "GET",
             "https://jsonplaceholder.typicode.com/users/1",
-            params=None,
-            headers=None,
-            timeout=None
+            params = None,
+            headers = None,
+            timeout = None
         )
 
 @allure.feature("Users API")
@@ -60,9 +60,9 @@ def test_get_nonexistent_user_mock(api_mock):
         mock_request.assert_called_once_with(
             "GET",
             "https://jsonplaceholder.typicode.com/users/9999",
-            params=None,
-            headers=None,
-            timeout=None
+            params = None,
+            headers = None,
+            timeout = None
         )
 
 @allure.feature("Users API")
@@ -98,8 +98,8 @@ def test_create_user_mock(api_mock):
         mock_request.assert_called_once_with(
             "POST",
             "https://jsonplaceholder.typicode.com/users",
-            json=user_data,
-            headers=None
+            json = user_data,
+            headers = None
         )
  
 @allure.feature("Users API")
@@ -134,8 +134,8 @@ def test_update_user_mock(api_mock):
         mock_request.assert_called_once_with(
             "PUT",
             "https://jsonplaceholder.typicode.com/users/1",
-            json=user_data,
-            headers=None
+            json = user_data,
+            headers = None
         )
         
 @allure.feature("Users API")
@@ -170,8 +170,8 @@ def test_patch_user_mock(api_mock):
         mock_request.assert_called_once_with(
             "PATCH",
             "https://jsonplaceholder.typicode.com/users/1",
-            json=user_data,
-            headers=None
+            json = user_data,
+            headers = None
         )
 
 @allure.feature("Users API")
@@ -188,9 +188,9 @@ def test_get_user_timeout_mock(api_mock):
         mock_request.assert_called_once_with(
             "GET",
             "https://jsonplaceholder.typicode.com/users/1",
-            params=None,
-            headers=None,
-            timeout=None
+            params = None,
+            headers = None,
+            timeout = None
         )
     
 @allure.feature("Users API")
@@ -207,9 +207,9 @@ def test_get_user_server_error_mock(api_mock):
         mock_request.assert_called_once_with(
             "GET",
             "https://jsonplaceholder.typicode.com/users/1",
-            params=None,
-            headers=None,
-            timeout=None
+            params = None,
+            headers = None,
+            timeout = None
         )
 
 @allure.feature("Users API")
@@ -238,9 +238,9 @@ def test_get_users_by_username_mock(api_mock):
         mock_request.assert_called_once_with(
             "GET",
             "https://jsonplaceholder.typicode.com/users",
-            params={"username": "Bret"},
-            headers=None,
-            timeout=None
+            params = {"username": "Bret"},
+            headers = None,
+            timeout = None
         )
 
 @allure.feature("Users API")
@@ -256,9 +256,9 @@ def test_get_users_with_headers_mock(api_mock):
         mock_request.assert_called_once_with(
             "GET",
             "https://jsonplaceholder.typicode.com/users",
-            params=None,
-            headers={"Accept": "application/json"},
-            timeout=None
+            params = None,
+            headers = {"Accept": "application/json"},
+            timeout = None
         )
         
 @allure.feature("Users API")
@@ -292,7 +292,8 @@ def test_create_user_with_headers_mock(api_mock):
         mock_request.assert_called_once_with(
             "POST",
             "https://jsonplaceholder.typicode.com/users",
-            json=user_data, headers={"Content-Type": "application/json"}
+            json = user_data,
+            headers = None
         )
         
 @allure.feature("Users API")
@@ -315,7 +316,7 @@ def test_delete_nonexistent_user_mock(api_mock):
         mock_request.assert_called_once_with(
             "DELETE",
             "https://jsonplaceholder.typicode.com/users/9999",
-            headers=None
+            headers = None
         )
 
 @allure.feature("Users API")
@@ -333,7 +334,7 @@ def test_delete_user_mock(api_mock):
         mock_request.assert_called_once_with(
             "DELETE",
             "https://jsonplaceholder.typicode.com/users/1",
-            headers=None
+            headers = None
         )
 
 @allure.feature("Users API")
@@ -355,8 +356,8 @@ def test_create_user_connection_error_mock(api_mock):
         mock_request.assert_called_once_with(
             "POST",
             "https://jsonplaceholder.typicode.com/users",
-            json=user_data,
-            headers=None
+            json = user_data,
+            headers = None
         )
 
 @allure.feature("Users API")
@@ -384,8 +385,8 @@ def test_update_user_server_error_mock(api_mock):
         mock_request.assert_called_once_with(
             "PUT",
             "https://jsonplaceholder.typicode.com/users/1",
-            json=user_data,
-            headers=None
+            json = user_data,
+            headers = None
         )
 
 @allure.feature("Users API")
@@ -405,8 +406,8 @@ def test_patch_user_timeout_mock(api_mock):
         mock_request.assert_called_once_with(
             "PATCH",
             "https://jsonplaceholder.typicode.com/users/1",
-            json=user_data,
-            headers=None
+            json = user_data,
+            headers = None
         )
         
 @allure.feature("Users API")
@@ -432,8 +433,8 @@ def test_patch_user_server_error_mock(api_mock):
         mock_request.assert_called_once_with(
             "PATCH",
             "https://jsonplaceholder.typicode.com/users/1",
-            json=user_data,
-            headers=None
+            json = user_data,
+            headers = None
         )
         
 @allure.feature("Users API")
@@ -488,16 +489,16 @@ def test_get_user_multiple_calls_mock(api_mock):
         call(
             "GET",
             "https://jsonplaceholder.typicode.com/users/1",
-            params=None,
-            headers=None,
-            timeout=None
+            params = None,
+            headers = None,
+            timeout = None
         ),
         call(
             "GET",
             "https://jsonplaceholder.typicode.com/users/2",
-            params=None,
-            headers=None,
-            timeout=None
+            params = None,
+            headers = None,
+            timeout = None
         )
     ]
     with allure.step("Verify HTTP request calls"):
@@ -516,9 +517,9 @@ def test_get_user_with_fixture(api_mock):
         mock_request.assert_called_once_with(
             "GET",
             "https://jsonplaceholder.typicode.com/users/1",
-            params=None,
-            headers=None,
-            timeout=None
+            params = None,
+            headers = None,
+            timeout = None
         )
     
 @pytest.mark.parametrize("status_code", [200, 201, 400, 404, 500])
@@ -537,9 +538,9 @@ def test_get_user_different_status_codes(api_mock, status_code):
         mock_request.assert_called_once_with(
             "GET",
             "https://jsonplaceholder.typicode.com/users/1",
-            params=None,
-            headers=None,
-            timeout=None
+            params = None,
+            headers = None,
+            timeout = None
         )
     
 @pytest.mark.parametrize("user_id, expected_name", [
@@ -569,9 +570,9 @@ def test_get_user_different_users_mock(api_mock, user_id, expected_name):
         mock_request.assert_called_once_with(
             "GET",
             f"https://jsonplaceholder.typicode.com/users/{user_id}",
-            params=None,
-            headers=None,
-            timeout=None
+            params = None,
+            headers = None,
+            timeout = None
         )
 
 @allure.feature("Users API")
@@ -614,8 +615,8 @@ def test_get_user_schema_mock(api_mock):
         mock_request.assert_called_once_with(
             "GET",
             "https://jsonplaceholder.typicode.com/users/1",
-            params=None,
-            headers=None,
-            timeout=None
+            params = None,
+            headers = None,
+            timeout = None
         )
         
