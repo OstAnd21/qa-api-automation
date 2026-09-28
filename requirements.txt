@@ -3,3 +3,5 @@ requests
 jsonschema
 allure-pytest
 python-dotenv==1.2.3
+pydantic
+

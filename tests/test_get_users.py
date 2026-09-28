@@ -1,5 +1,6 @@
 from api.users_api import UsersAPI
 from utils.allure_helpers import attach_response
+from models.user import UserResponse
 from utils.response_validator import(
     assert_status_code,
     assert_content_type,
@@ -42,13 +43,13 @@ def test_get_user(user_id):
     with allure.step("Check response time"):
         assert_response_time(response.elapsed_time, 2)
     with allure.step("Parse response JSON"):
-        data = response.json()
+        user = UserResponse.model_validate(response.json())
     attach_response(response)
     with allure.step("Check user data"):
-        assert data["id"] == 1
-        assert data["name"] == "Leanne Graham"
-        assert data["username"] == "Bret"
-        assert data["email"] == "Sincere@april.biz"
+        assert user.id == 1
+        assert user.name == "Leanne Graham"
+        assert user.username == "Bret"
+        assert user.email == "Sincere@april.biz"
         
 @allure.story("Get user")
 @allure.title("Get nonexistent user")
