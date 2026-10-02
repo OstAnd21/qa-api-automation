@@ -1,5 +1,6 @@
 from config import settings
 from api.base_api import BaseAPI
+from pydantic import TypeAdapter
 from models.user import (
     UserResponse,
     UserCreateRequest,
@@ -72,4 +73,8 @@ class UsersAPI(BaseAPI):
         response = self.get(f"/users/{user_id}")
         return UserResponse.model_validate(response.json())
     
-    
+    def get_users_models(self):
+        response = self.get("/users")
+        return TypeAdapter(
+            list[UserResponse]
+        ).validate_python(response.json())

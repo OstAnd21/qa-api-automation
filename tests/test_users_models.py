@@ -1,4 +1,4 @@
-from pydantic import ValidationError
+from pydantic import ValidationError, TypeAdapter
 from api.users_api import UsersAPI
 from copy import deepcopy
 from unittest.mock import patch
@@ -123,3 +123,26 @@ def test_user_update_request_model_invalid():
     }
     with pytest.raises(ValidationError):
         UserUpdateRequest.model_validate(invalid_user)
+
+def test_users_list_response_model(valid_user):
+    users = TypeAdapter(list[UserResponse]).validate_python([valid_user, valid_user])
+    assert len(users) == 2
+    assert all(isinstance(user, UserResponse) for user in users)
+    assert users[0].id == 1
+    assert users[1].username == "Bret"
+
+def test_users_list_response_model_invalid(valid_user):
+    invalid_user = valid_user.copy()
+    invalid_user["id"] = "invalid"
+    users = [valid_user, invalid_user]
+    with pytest.raises(ValidationError):
+        TypeAdapter(list[UserResponse]).validate_python(users)
+
+def test_get_users_models():
+    api = UsersAPI()
+    users = api.get_users_models()
+    assert isinstance(users, list)
+    assert len(users) > 0
+    assert all(isinstance(user, UserResponse) for user in users)
+    assert users[0].id == 1
+    assert users[0].username == "Bret"
