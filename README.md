@@ -21,12 +21,15 @@ qa-api-automation/
 ├── api/
 │   ├── base_api.py
 │   └── users_api.py
+├── models/
+│   └── user.py
 ├── schemas/
 │   └── user_schema.py
 ├── test_data/
 │   └── users_data.py
 ├── tests/
 │   ├── conftest.py
+│   ├── test_config.py
 │   ├── test_create_users.py
 │   ├── test_delete_users.py
 │   ├── test_errors.py
@@ -34,6 +37,7 @@ qa-api-automation/
 │   ├── test_response_validator.py
 │   ├── test_update_users.py
 │   ├── test_users_mock.py
+│   ├── test_users_models.py
 │   ├── test_users_parametrize.py
 │   ├── test_users_schema.py
 │   ├── test_users_schema_negative.py
@@ -45,6 +49,7 @@ qa-api-automation/
 ├── .github/
 │   └── workflows/
 │       └── tests.yml
+├── .env
 ├── .gitignore
 ├── config.py
 ├── pytest.ini
@@ -80,7 +85,7 @@ python -m pytest -s
 
 ## Test Results
 
-80 tests passed.
+98 tests passed.
 
 ## CI/CD
 
